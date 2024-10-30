@@ -5,58 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Downloads</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             margin: 0;
             padding: 0;
-            overflow: auto; /* Permite rolagem */
+            font-family: 'Roboto', sans-serif;
+            background-color: #2c3e50;
+            color: #ecf0f1;
         }
         .container {
-            max-width: 800px; /* Limits the width of the container */
-            margin: 0 auto; /* Centers the container */
-            padding: 20px; /* Adds padding inside the container */
-            text-align: center; /* Center-aligns text */
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
         }
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #34495e;
+            border: 2px solid transparent;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeIn 0.5s forwards;
+        }
+        .tab-button:hover {
+            border-color: #27ae60;
+            background-color: #3c6f5f;
+        }
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+            animation: slideIn 0.6s ease-out forwards;
+        }
+        /* Video */
         .video-container {
-            margin-top: 20px; /* Space above the video */
-            text-align: center; /* Center-aligns text and video */
-            clear: both; /* Ensures the video stays below the buttons */
-            max-height: 450px; /* Limita a altura do contêiner do vídeo */
-            overflow: hidden; /* Esconde qualquer conteúdo que transborde */
+            position: relative;
+            margin: 20px 0;
         }
         iframe {
-            width: 90%; /* Reduz a largura do vídeo */
-            height: 100%; /* Define altura para preencher o contêiner */
-            max-width: 1000px; /* Largura máxima do vídeo */
-            max-height: 450px; /* Altura máxima do vídeo */
+            width: 100%;
+            height: 400px; /* Ajuste a altura conforme necessário */
         }
-        .tutorial-text {
-            margin-top: 10px; /* Space above the text */
-            font-weight: bold; /* Makes the text bold */
-            color: #ffffff; /* Sets text color to white for better visibility */
-            background-color: rgba(0, 0, 0, 0.8); /* Darker semi-transparent background for contrast */
-            padding: 15px; /* Increases padding for better readability */
-            border-radius: 5px; /* Rounds the corners */
+        /* Buttons */
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            background-color: #34495e;
+            color: #ffffff;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            transform: translateY(10px);
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+            animation-delay: 0.3s;
+        }
+        button:hover {
+            border: 2px solid #27ae60;
+            background-color: #3c6f5f;
+        }
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="theme1">
+<body>
     <div class="container">
         <h1>Client Downloads</h1>
-        <a href="https://mega.nz/file/2AolQJgQ#F6Jm8fzF0LbKMtyOYqADycusMGpXPqzMdYsu5DiZ2aU" download>
-            <button>Prax Client</button>
-        </a>
-        <a href="https://www.mediafire.com/file/1qlkl1scb9xxtwx/Zpanel_1.1.3.zip/file" download>
-            <button>ZPanel</button>
-        </a>
-        <a href="https://www.apkmirror.com/apk/blockman-go-studio/blockman-go-blocky-mods/blockman-go-blocky-mods-2-94-4-release/" download>
-            <button>Blockman Go 2.94.4 old version</button>
-        </a>
-
-        <button onclick="toggleYoutube()">YouTube Channels</button>
         
-        <div class="youtube-list" id="youtubeList">
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab-button" onclick="showTab('updates')">Updates</div>
+            <div class="tab-button" onclick="showTab('downloads')">Downloads</div>
+            <div class="tab-button" onclick="showTab('youtube')">YouTube</div>
+            <div class="tab-button" onclick="showTab('discord')">Discord</div>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="updates" class="tab-content">
+            <h2>Updates</h2>
+            <p>new update in zpanel!</p>
+            <p>now you can use any keyboard to type</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/m27v2qnjsp0?autoplay=1&loop=1&playlist=m27v2qnjsp0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="downloads" class="tab-content">
+            <h2>Downloads</h2>
+            <a href="https://mega.nz/file/2AolQJgQ#F6Jm8fzF0LbKMtyOYqADycusMGpXPqzMdYsu5DiZ2aU" download>
+                <button>Prax Client</button>
+            </a>
+            <a href="https://www.mediafire.com/file/1qlkl1scb9xxtwx/Zpanel_1.1.3.zip/file" download>
+                <button>ZPanel</button>
+            </a>
+            <a href="https://www.apkmirror.com/apk/blockman-go-studio/blockman-go-blocky-mods/blockman-go-blocky-mods-2-94-4-release/" download>
+                <button>Blockman Go 2.94.4 old version</button>
+            </a>
+        </div>
+
+        <div id="youtube" class="tab-content">
+            <h2>YouTube Channels</h2>
             <a href="https://youtube.com/@zynxusbg2009?si=l4HKHWNDkZ9Vj-hl" target="_blank">
                 <button>YouTube Zynxus</button>
             </a>
@@ -71,55 +143,25 @@
             </a>
         </div>
 
-        <button onclick="changeTheme()">Change Theme</button>
-
-        <a href="https://discord.gg/cFbtjBH3DS" target="_blank">
-            <button class="discord-button">Join Our Discord</button>
-        </a>
-
-        <!-- YouTube Video Section -->
-        <div class="video-container" id="videoContainer">
-            <h2>Watch Video Tutorial</h2>
-            <iframe id="video" src="https://www.youtube.com/embed/OUwbN2M7rM4?start=240&controls=0&disablekb=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <p class="tutorial-text">Tutorial on how to set up the panel by 333 l</p> <!-- Tutorial description -->
+        <div id="discord" class="tab-content">
+            <h2>Discord</h2>
+            <a href="https://discord.gg/cFbtjBH3DS" target="_blank">
+                <button class="discord-button">Join Our Discord</button>
+            </a>
         </div>
     </div>
 
     <script>
-        let currentTheme = 1;
-
-        function changeTheme() {
-            currentTheme = (currentTheme % 4) + 1; // Alternates between 1 and 4
-            document.body.className = 'theme' + currentTheme;
-            document.querySelector('.container').style.background = currentTheme === 2 ? 'rgba(231, 76, 60, 0.9)' : currentTheme === 3 ? 'rgba(142, 68, 173, 0.9)' : currentTheme === 4 ? 'rgba(39, 174, 96, 0.9)' : 'rgba(44, 62, 80, 0.9)';
+        function showTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
         }
 
-        function toggleYoutube() {
-            const youtubeList = document.getElementById('youtubeList');
-            if (youtubeList.style.display === 'none' || youtubeList.style.display === '') {
-                youtubeList.style.display = 'block';
-                youtubeList.style.opacity = '0'; // Starts invisible
-                youtubeList.style.transform = 'translateY(-10px)'; // Moves up
-                setTimeout(() => {
-                    youtubeList.style.transition = 'opacity 0.5s, transform 0.5s'; // Adds transition
-                    youtubeList.style.opacity = '1'; // Makes visible
-                    youtubeList.style.transform = 'translateY(0)'; // Returns to original position
-                }, 10);
-            } else {
-                youtubeList.style.transition = 'opacity 0.5s, transform 0.5s';
-                youtubeList.style.opacity = '0'; // Makes invisible
-                youtubeList.style.transform = 'translateY(-10px)'; // Moves up
-                setTimeout(() => {
-                    youtubeList.style.display = 'none'; // Hides the element
-                }, 500); // Waits for the animation to finish
-            }
-        }
-
-        // Function to keep the video running from 4:00
-        window.onload = function() {
-            const video = document.getElementById('video');
-            video.src = video.src; // Reloads the video to start from the specified time
-        };
+        // Set the first tab as active by default
+        document.addEventListener("DOMContentLoaded", function() {
+            showTab('updates');
+        });
     </script>
 </body>
 </html>
