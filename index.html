@@ -245,9 +245,10 @@ button[type="submit"]:hover {
     <script>
         const suggestionsKey = 'suggestions';
         let suggestions = JSON.parse(localStorage.getItem(suggestionsKey)) || [];
-        let spammers = JSON.parse(localStorage.getItem('spammers')) || {}; // IDs de spammers
         const SPAM_LIMIT = 3; // Número máximo de sugestões permitidas
         const SPAM_TIME_FRAME = 10000; // Tempo em milissegundos para considerar spam (10 segundos)
+        let suggestionsCount = {}; // Contador de sugestões por usuário
+        let spammers = JSON.parse(localStorage.getItem('spammers')) || {}; // IDs de spammers
         
         function getUserId() {
             if (!localStorage.getItem('userId')) {
@@ -296,10 +297,14 @@ button[type="submit"]:hover {
                     suggestionsCount[userId] = { count: 1, firstSuggestionTime: currentTime };
                 }
 
-                suggestions.push({ id: userId, name: userName, suggestion: userSuggestion });
-                localStorage.setItem(suggestionsKey, JSON.stringify(suggestions));
+                // Adiciona sugestão ao array e exibe imediatamente
+                suggestions.push({ name: userName, suggestion: userSuggestion });
                 displaySuggestions();
 
+                // Armazena as sugestões no localStorage
+                localStorage.setItem(suggestionsKey, JSON.stringify(suggestions));
+
+                // Limpa campos
                 document.getElementById('userName').value = '';
                 document.getElementById('userSuggestion').value = '';
             } else {
