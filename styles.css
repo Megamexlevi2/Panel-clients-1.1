@@ -5,6 +5,13 @@ body {
     background-color: #1a1a2e; /* Fundo escuro e elegante */
     color: #ffffff;
     background-image: linear-gradient(135deg, #1a1a2e, #162447);
+    animation: backgroundAnimation 10s ease infinite; /* Animação de fundo */
+}
+
+@keyframes backgroundAnimation {
+    0% { background-color: #1a1a2e; }
+    50% { background-color: #0f3460; }
+    100% { background-color: #1a1a2e; }
 }
 
 .container {
@@ -16,7 +23,14 @@ body {
     border-radius: 15px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
     background: linear-gradient(135deg, #0f3460, #e94560); /* Gradiente azul e vermelho */
-    animation: pulse 1.5s infinite;
+    animation: pulse 1.5s infinite, fadeIn 1s; /* Animação de pulsar e de entrada */
+    filter: brightness(1.1); /* Aumentar o brilho */
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 /* Pulsing Animation */
@@ -43,10 +57,25 @@ body {
     color: #ffffff;
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slideIn 0.5s; /* Animação de entrada */
 }
 .tab-button:hover {
     border-color: #e94560; /* Vermelho vibrante no hover */
     background-color: #e94e77; /* Cor mais clara ao passar o mouse */
+    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
+    filter: brightness(1.2); /* Aumentar o brilho ao passar o mouse */
+}
+
+/* Animação de entrada */
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* Tab Content */
@@ -73,7 +102,20 @@ body {
     border: 5px solid #e94560; /* Vermelho vibrante */
     border-radius: 8px;
     overflow: hidden;
+    animation: zoomIn 1s, fadeIn 0.5s; /* Animação de zoom e entrada */
+    filter: brightness(1.1); /* Aumentar o brilho */
 }
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 iframe {
     width: 100%;
     height: 400px;
@@ -91,9 +133,13 @@ button {
     color: #ffffff;
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    filter: brightness(1.1); /* Aumentar o brilho */
+    animation: fadeIn 0.5s; /* Animação de entrada */
 }
 button:hover {
     background-color: #e94560; /* Vermelho vibrante ao passar o mouse */
+    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
+    filter: brightness(1.2); /* Aumentar o brilho ao passar o mouse */
 }
 
 /* Suggestions */
@@ -103,6 +149,18 @@ button:hover {
     border: 2px solid #e94560; /* Vermelho vibrante */
     border-radius: 10px;
     background-color: #0f3460; /* Azul escuro */
+    animation: slideIn 0.5s; /* Animação de entrada */
+    filter: brightness(1.1); /* Aumentar o brilho */
+}
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 textarea {
@@ -111,7 +169,20 @@ textarea {
     border-radius: 5px;
     border: 1px solid #e94560; /* Vermelho vibrante */
     margin-bottom: 10px;
-    resize: none;
+    transition: border-color 0.3s ease;
+}
+textarea:focus {
+    border-color: #e94e77; /* Cor ao focar */
+    animation: shake 0.3s; /* Animação de tremor ao focar */
+}
+
+/* Animação de tremor */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    50% { transform: translateX(2px); }
+    75% { transform: translateX(-2px); }
+    100% { transform: translateX(0); }
 }
 
 button[type="submit"] {
@@ -121,11 +192,15 @@ button[type="submit"] {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    filter: brightness(1.1); /* Aumentar o brilho */
+    animation: fadeIn 0.5s; /* Animação de entrada */
 }
 button[type="submit"]:hover {
     background-color: #ff6b81; /* Cor mais clara ao passar o mouse */
+    filter: brightness(1.2); /* Aumentar o brilho ao passar o mouse */
 }
 
+/* Suggestions Output */
 #suggestionsOutput {
     list-style-type: none;
     padding: 0;
@@ -137,9 +212,11 @@ button[type="submit"]:hover {
     background-color: #0f3460; /* Azul escuro */
     border: 1px solid #e94560; /* Vermelho vibrante */
     border-radius: 5px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s; /* Animação de entrada */
 }
 #suggestionsOutput li:hover {
     transform: translateY(-2px);
     box-shadow: 0 0 10px rgba(233, 69, 96, 0.5); /* Sombra ao passar o mouse */
+    filter: brightness(1.1); /* Aumentar o brilho ao passar o mouse */
 }
