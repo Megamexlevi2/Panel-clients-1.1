@@ -2,9 +2,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    background-image: linear-gradient(135deg, #2c3e50, #4a6572);
+    background-color: #1a1a2e; /* Fundo escuro e elegante */
+    color: #ffffff;
+    background-image: linear-gradient(135deg, #1a1a2e, #162447);
 }
 
 .container {
@@ -12,21 +12,20 @@ body {
     margin: 0 auto;
     padding: 20px;
     text-align: center;
-    border: 5px solid #27ae60;
+    border: 5px solid #e94560; /* Vermelho vibrante */
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    background: linear-gradient(135deg, #34495e, #1abc9c);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+    background: linear-gradient(135deg, #0f3460, #e94560); /* Gradiente azul e vermelho */
     animation: pulse 1.5s infinite;
-    transition: all 0.5s ease;
 }
 
 /* Pulsing Animation */
 @keyframes pulse {
     0%, 100% {
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 30px rgba(233, 69, 96, 0.5);
     }
     50% {
-        box-shadow: 0 0 40px rgba(39, 174, 96, 0.8);
+        box-shadow: 0 0 50px rgba(233, 69, 96, 0.8);
     }
 }
 
@@ -39,20 +38,15 @@ body {
 .tab-button {
     padding: 10px 20px;
     cursor: pointer;
-    background-color: #34495e;
+    background-color: #0f3460; /* Azul escuro */
     border: 2px solid transparent;
     color: #ffffff;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 5px;
-    transform: scale(1);
-    animation: fadeIn 0.5s forwards;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 .tab-button:hover {
-    border-color: #27ae60;
-    background-color: #3c6f5f;
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(39, 174, 96, 0.8), 0 0 20px rgba(0, 0, 0, 0.3);
+    border-color: #e94560; /* Vermelho vibrante no hover */
+    background-color: #e94e77; /* Cor mais clara ao passar o mouse */
 }
 
 /* Tab Content */
@@ -61,33 +55,24 @@ body {
     opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s ease;
     transform: translateY(20px);
-    border: 2px solid #27ae60;
+    border: 2px solid #e94560; /* Vermelho vibrante */
     border-radius: 10px;
     padding: 20px;
-    background-color: #34495e;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    background-color: #0f3460; /* Azul escuro */
 }
 .tab-content.active {
     display: block;
     opacity: 1;
     transform: translateY(0);
-    animation: slideIn 0.6s ease-out forwards;
 }
 
 /* Video */
 .video-container {
     position: relative;
     margin: 20px 0;
-    border: 5px solid #27ae60;
+    border: 5px solid #e94560; /* Vermelho vibrante */
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    animation: shine 1.5s infinite;
-}
-@keyframes shine {
-    0% { box-shadow: 0 0 20px rgba(39, 174, 96, 0.5); }
-    50% { box-shadow: 0 0 30px rgba(39, 174, 96, 0.8); }
-    100% { box-shadow: 0 0 20px rgba(39, 174, 96, 0.5); }
 }
 iframe {
     width: 100%;
@@ -102,70 +87,43 @@ button {
     margin: 10px;
     border: none;
     cursor: pointer;
-    background-color: #34495e;
+    background-color: #0f3460; /* Azul escuro */
     color: #ffffff;
     border-radius: 5px;
-    transition: background-color 0.3s ease, border 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    transform: translateY(10px);
-    opacity: 0;
-    animation: fadeIn 0.5s forwards;
-    animation-delay: 0.3s;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 button:hover {
-    border: 2px solid #27ae60;
-    background-color: #3c6f5f;
-    transform: translateY(5px);
-    box-shadow: 0 0 15px rgba(39, 174, 96, 0.8), 0 0 20px rgba(0, 0, 0, 0.3);
+    background-color: #e94560; /* Vermelho vibrante ao passar o mouse */
 }
 
-/* Animations */
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-@keyframes slideIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
+/* Suggestions */
 .suggestion-container {
     margin-top: 20px;
     padding: 15px;
-    border: 2px solid #27ae60;
+    border: 2px solid #e94560; /* Vermelho vibrante */
     border-radius: 10px;
-    background-color: #34495e;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    background-color: #0f3460; /* Azul escuro */
 }
 
 textarea {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #27ae60;
+    border: 1px solid #e94560; /* Vermelho vibrante */
     margin-bottom: 10px;
     resize: none;
-    transition: border 0.3s ease;
-}
-
-textarea:focus {
-    border-color: #1abc9c;
-    box-shadow: 0 0 5px rgba(39, 174, 96, 0.5);
 }
 
 button[type="submit"] {
-    background-color: #27ae60;
+    background-color: #e94560; /* Vermelho vibrante */
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 button[type="submit"]:hover {
-    background-color: #1abc9c;
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(39, 174, 96, 0.8);
+    background-color: #ff6b81; /* Cor mais clara ao passar o mouse */
 }
 
 #suggestionsOutput {
@@ -176,12 +134,12 @@ button[type="submit"]:hover {
 #suggestionsOutput li {
     margin: 5px 0;
     padding: 10px;
-    background-color: #34495e;
-    border: 1px solid #27ae60;
+    background-color: #0f3460; /* Azul escuro */
+    border: 1px solid #e94560; /* Vermelho vibrante */
     border-radius: 5px;
     transition: transform 0.3s ease;
 }
 #suggestionsOutput li:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
+    box-shadow: 0 0 10px rgba(233, 69, 96, 0.5); /* Sombra ao passar o mouse */
 }
