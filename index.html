@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Estilos básicos */
         body {
     margin: 0;
     padding: 0;
@@ -245,64 +246,24 @@ button[type="submit"]:hover {
     <script>
         const suggestionsKey = 'suggestions';
         let suggestions = JSON.parse(localStorage.getItem(suggestionsKey)) || [];
-        const SPAM_LIMIT = 3; // Número máximo de sugestões permitidas
-        const SPAM_TIME_FRAME = 10000; // Tempo em milissegundos para considerar spam (10 segundos)
-        let suggestionsCount = {}; // Contador de sugestões por usuário
-        let spammers = JSON.parse(localStorage.getItem('spammers')) || {}; // IDs de spammers
-        
-        function getUserId() {
-            if (!localStorage.getItem('userId')) {
-                const userId = 'user_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('userId', userId);
-            }
-            return localStorage.getItem('userId');
-        }
 
         function showTab(tabId) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-
             if (tabId === 'suggestions') {
                 displaySuggestions();
             }
         }
 
         function submitSuggestion() {
-            const userId = getUserId();
             const userName = document.getElementById('userName').value;
             const userSuggestion = document.getElementById('userSuggestion').value;
 
-            if (spammers[userId]) {
-                alert('You have been muted for spamming. You cannot submit suggestions.');
-                return;
-            }
-
             if (userName && userSuggestion) {
-                // Contagem de sugestões
-                if (!suggestionsCount[userId]) {
-                    suggestionsCount[userId] = { count: 0, firstSuggestionTime: Date.now() };
-                }
-                
-                const currentTime = Date.now();
-                if (currentTime - suggestionsCount[userId].firstSuggestionTime < SPAM_TIME_FRAME) {
-                    suggestionsCount[userId].count++;
-                    if (suggestionsCount[userId].count > SPAM_LIMIT) {
-                        spammers[userId] = true;
-                        localStorage.setItem('spammers', JSON.stringify(spammers));
-                        alert('You have been muted for spamming. You cannot submit suggestions.');
-                        return;
-                    }
-                } else {
-                    suggestionsCount[userId] = { count: 1, firstSuggestionTime: currentTime };
-                }
-
-                // Adiciona sugestão ao array e exibe imediatamente
                 suggestions.push({ name: userName, suggestion: userSuggestion });
-                displaySuggestions();
-
-                // Armazena as sugestões no localStorage
                 localStorage.setItem(suggestionsKey, JSON.stringify(suggestions));
+                displaySuggestions();
 
                 // Limpa campos
                 document.getElementById('userName').value = '';
