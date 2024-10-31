@@ -5,196 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Downloads</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     <style>
         /* Estilos básicos */
         body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    background-image: linear-gradient(135deg, #2c3e50, #4a6572);
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    border: 5px solid #27ae60;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    background: linear-gradient(135deg, #34495e, #1abc9c);
-    animation: pulse 1.5s infinite;
-    transition: all 0.5s ease;
-}
-
-/* Pulsing Animation */
-@keyframes pulse {
-    0%, 100% {
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    }
-    50% {
-        box-shadow: 0 0 40px rgba(39, 174, 96, 0.8);
-    }
-}
-
-/* Tabs */
-.tabs {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-.tab-button {
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #34495e;
-    border: 2px solid transparent;
-    color: #ffffff;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 5px;
-    transform: scale(1);
-    animation: fadeIn 0.5s forwards;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-.tab-button:hover {
-    border-color: #27ae60;
-    background-color: #3c6f5f;
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(39, 174, 96, 0.8), 0 0 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Tab Content */
-.tab-content {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    transform: translateY(20px);
-    border: 2px solid #27ae60;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #34495e;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-}
-.tab-content.active {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-    animation: slideIn 0.6s ease-out forwards;
-}
-
-/* Video */
-.video-container {
-    position: relative;
-    margin: 20px 0;
-    border: 5px solid #27ae60;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    animation: shine 1.5s infinite;
-}
-@keyframes shine {
-    0% { box-shadow: 0 0 20px rgba(39, 174, 96, 0.5); }
-    50% { box-shadow: 0 0 30px rgba(39, 174, 96, 0.8); }
-    100% { box-shadow: 0 0 20px rgba(39, 174, 96, 0.5); }
-}
-iframe {
-    width: 100%;
-    height: 400px;
-    border: none;
-    border-radius: 8px;
-}
-
-/* Buttons */
-button {
-    padding: 10px 15px;
-    margin: 10px;
-    border: none;
-    cursor: pointer;
-    background-color: #34495e;
-    color: #ffffff;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, border 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    transform: translateY(10px);
-    opacity: 0;
-    animation: fadeIn 0.5s forwards;
-    animation-delay: 0.3s;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-button:hover {
-    border: 2px solid #27ae60;
-    background-color: #3c6f5f;
-    transform: translateY(5px);
-    box-shadow: 0 0 15px rgba(39, 174, 96, 0.8), 0 0 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Animations */
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-@keyframes slideIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-.suggestion-container {
-    margin-top: 20px;
-    padding: 15px;
-    border: 2px solid #27ae60;
-    border-radius: 10px;
-    background-color: #34495e;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-}
-
-textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #27ae60;
-    margin-bottom: 10px;
-    resize: none;
-    transition: border 0.3s ease;
-}
-
-textarea:focus {
-    border-color: #1abc9c;
-    box-shadow: 0 0 5px rgba(39, 174, 96, 0.5);
-}
-
-button[type="submit"] {
-    background-color: #27ae60;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-button[type="submit"]:hover {
-    background-color: #1abc9c;
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(39, 174, 96, 0.8);
-}
-
-#suggestionsOutput {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 15px;
-}
-#suggestionsOutput li {
-    margin: 5px 0;
-    padding: 10px;
-    background-color: #34495e;
-    border: 1px solid #27ae60;
-    border-radius: 5px;
-    transition: transform 0.3s ease;
-}
-#suggestionsOutput li:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
-}
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            overflow: hidden; /* Evita rolagem */
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #34495e;
+            color: #ffffff;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 5px;
+        }
+        .tab-button:hover {
+            background-color: #3c6f5f;
+            transform: scale(1.05);
+        }
+        /* Conteúdo das Tabs */
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(20px);
+        }
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -251,6 +107,7 @@ button[type="submit"]:hover {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
+
             if (tabId === 'suggestions') {
                 displaySuggestions();
             }
@@ -261,6 +118,7 @@ button[type="submit"]:hover {
             const userSuggestion = document.getElementById('userSuggestion').value;
 
             if (userName && userSuggestion) {
+                // Adiciona sugestão ao array e exibe imediatamente
                 suggestions.push({ name: userName, suggestion: userSuggestion });
                 localStorage.setItem(suggestionsKey, JSON.stringify(suggestions));
                 displaySuggestions();
