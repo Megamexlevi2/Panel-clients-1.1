@@ -63,17 +63,20 @@ body {
 .tab-content {
     display: none;
     opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease, height 0.5s ease; /* Adicionada transição de altura */
     transform: translateY(20px);
     border: 5px solid #e94560; /* Borda vermelha */
     border-radius: 10px;
     padding: 20px;
     background-color: #0f3460;
+    height: 0; /* Altura inicial */
+    overflow: hidden; /* Ocultar conteúdo */
 }
 .tab-content.active {
     display: block;
     opacity: 1;
     transform: translateY(0);
+    height: auto; /* Permitir altura automática */
     animation: fadeIn 0.5s; /* Animação ao mostrar */
 }
 
@@ -106,7 +109,6 @@ button {
 button:hover {
     background-color: #e94560; /* Vermelho vibrante ao passar o mouse */
     transform: scale(1.05);
-    filter: brightness(1.2);
 }
 
 /* Footer */
