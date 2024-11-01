@@ -9,9 +9,10 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #2f3136; /* Background color */
-            color: white; /* Text color */
+            background-color: #2f3136;
+            color: white;
             transition: background-color 0.3s;
+            overflow-x: hidden;
         }
 
         .sidebar {
@@ -22,13 +23,41 @@
             left: 0;
             top: 0;
             z-index: 1;
-            border: 1px solid #7289da; /* Border for sidebar */
+            transform: translateX(-220px); /* Hide off-screen */
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease; /* Slide and fade effect */
+            border: 1px solid #7289da;
+        }
+
+        .sidebar.show {
+            transform: translateX(0); /* Slide in */
+            opacity: 1;
         }
 
         .container {
             margin-left: 200px;
             padding: 20px;
-            border: 1px solid #7289da; /* Border for main container */
+            border: 1px solid #7289da;
+            transition: margin-left 0.5s ease;
+        }
+
+        .menu-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #7289da;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            z-index: 2;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #5b6eae;
         }
 
         .tab-button {
@@ -36,12 +65,13 @@
             width: 100%;
             padding: 10px;
             background-color: #7289da;
-            border: 1px solid #5b6eae; /* Border for buttons */
+            border: 1px solid #5b6eae;
             color: white;
             cursor: pointer;
             margin: 5px 0;
             border-radius: 5px;
             text-align: left;
+            transition: background-color 0.3s;
         }
 
         .tab-button:hover {
@@ -56,7 +86,7 @@
             margin-top: 10px;
             opacity: 0;
             transition: opacity 0.3s ease;
-            border: 1px solid #7289da; /* Border for tab content */
+            border: 1px solid #7289da;
         }
 
         .tab-content.active {
@@ -67,41 +97,13 @@
         footer {
             margin-top: 20px;
             text-align: center;
-            border-top: 1px solid #7289da; /* Border for footer */
+            border-top: 1px solid #7289da;
             padding-top: 10px;
-        }
-
-        label {
-            color: white;
-            display: block;
-            margin: 10px 0;
-        }
-
-        .discord-button {
-            background-color: #7289da;
-            color: white;
-            padding: 10px 15px;
-            border: 1px solid #5b6eae; /* Border for Discord button */
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .discord-button:hover {
-            background-color: #5b6eae;
-        }
-
-        .button-container {
-            margin-top: 20px;
-        }
-
-        .name-input, .tab-button, .container, .discord-button, .tab-content, footer {
-            border: 1px solid #7289da; /* Apply border to multiple elements */
         }
     </style>
 </head>
 <body>
-    <button class="menu-button" onclick="toggleMenu()">&#9776;</button> <!-- Menu button -->
+    <button class="menu-button" onclick="toggleMenu()">&#9776;</button>
     
     <div class="sidebar" id="sidebar">
         <h2>Menu</h2>
@@ -113,14 +115,12 @@
     <div class="container" id="container">
         <h1>Client Downloads</h1>
 
-        <!-- Field for entering name -->
         <div id="nameContainer" class="name-input">
             <label for="nameInput">Enter your name:</label>
             <input type="text" id="nameInput" placeholder="Name" />
             <button onclick="setName()">Set Name</button>
         </div>
 
-        <!-- Tab Content -->
         <div id="downloads" class="tab-content">
             <h2>Downloads</h2>
             <a href="PraxClientRelease1.2.2-fix2.zip" download>
@@ -141,7 +141,6 @@
             </a>
         </div>
 
-        <!-- Updates Tab Content -->
         <div id="updates" class="tab-content">
             <h2>Updates</h2>
             <iframe 
@@ -154,7 +153,6 @@
             ></iframe>
         </div>
 
-        <!-- Footer -->
         <footer>
             <p>2024 Zynxus & Debunked Rage all rights reserved</p>
         </footer>
@@ -164,29 +162,23 @@
         function showTab(tabId) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => {
-                content.classList.remove('active', 'fade-in');
-                content.classList.add('fade-out');
+                content.classList.remove('active');
             });
             setTimeout(() => {
-                document.getElementById(tabId).classList.add('active', 'fade-in');
-                contents.forEach(content => {
-                    content.classList.remove('fade-out');
-                });
+                document.getElementById(tabId).classList.add('active');
             }, 300);
         }
 
         function closeMenu() {
             const sidebar = document.getElementById('sidebar');
-            const container = document.getElementById('container');
-            sidebar.classList.add('hidden');
-            container.style.marginLeft = '0';
+            sidebar.classList.remove('show');
+            document.getElementById('container').style.marginLeft = '0';
         }
 
         function toggleMenu() {
             const sidebar = document.getElementById('sidebar');
-            const container = document.getElementById('container');
-            sidebar.classList.toggle('hidden');
-            container.style.marginLeft = sidebar.classList.contains('hidden') ? '0' : '200px';
+            sidebar.classList.toggle('show');
+            document.getElementById('container').style.marginLeft = sidebar.classList.contains('show') ? '200px' : '0';
         }
 
         function setName() {
