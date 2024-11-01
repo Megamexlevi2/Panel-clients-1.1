@@ -5,19 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Downloads</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to right, #4e54c8, #8f94fb); /* Beautiful gradient background */
+            background-color: #2f3136; /* Background color */
             color: white; /* Text color */
-            transition: background 0.5s ease; /* Smooth background color transition */
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
+            transition: background-color 0.3s; /* Smooth background color transition */
         }
 
         .sidebar {
-            width: 240px;
+            width: 200px;
             background-color: #23272a; /* Sidebar background color */
             height: 100%;
             position: fixed;
@@ -25,7 +23,6 @@
             left: 0;
             top: 0;
             z-index: 1;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Sidebar shadow */
         }
 
         .hidden {
@@ -33,7 +30,7 @@
         }
 
         .container {
-            margin-left: 240px; /* Space for sidebar */
+            margin-left: 200px; /* Space for sidebar */
             padding: 20px;
             transition: margin-left 0.3s; /* Smooth margin transition */
         }
@@ -41,39 +38,33 @@
         .tab-button {
             display: block;
             width: 100%;
-            padding: 15px;
+            padding: 10px;
             background-color: #7289da; /* Button color */
             border: none;
             color: white;
             cursor: pointer;
-            margin: 10px 0;
+            margin: 5px 0;
             border-radius: 5px;
             text-align: left;
-            font-size: 18px;
-            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
         }
 
         .tab-button:hover {
             background-color: #5b6eae; /* Hover color */
-            transform: scale(1.05); /* Slightly grow button */
         }
 
         .tab-content {
             display: none; /* Hide content by default */
-            padding: 30px;
+            padding: 20px;
             background-color: #36393f; /* Content background color */
             border-radius: 8px;
             margin-top: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Content shadow */
-            transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth fade and slide transition */
             opacity: 0; /* Start invisible for animation */
-            transform: translateY(20px); /* Start slightly lower for slide effect */
+            transition: opacity 0.3s ease; /* Fade transition */
         }
 
         .tab-content.active {
             display: block; /* Show active content */
             opacity: 1; /* Fully visible */
-            transform: translateY(0); /* Slide up to position */
         }
 
         footer {
@@ -90,13 +81,11 @@
         .discord-button {
             background-color: #7289da; /* Discord button color */
             color: white;
-            padding: 15px 20px;
+            padding: 10px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
-            font-size: 18px;
-            transition: background-color 0.3s ease; /* Smooth hover effect */
         }
 
         .discord-button:hover {
@@ -120,32 +109,13 @@
         .fade-out {
             opacity: 0;
         }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 200px;
-            }
-
-            .container {
-                margin-left: 200px;
-            }
-
-            .tab-button {
-                font-size: 16px; /* Smaller button text */
-            }
-
-            .discord-button {
-                font-size: 16px; /* Smaller button text */
-            }
-        }
     </style>
 </head>
 <body>
-    <button class="menu-button" onclick="toggleMenu()" style="position: absolute; top: 20px; left: 20px; z-index: 10; background: #7289da; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">&#9776;</button> <!-- Menu button -->
+    <button class="menu-button" onclick="toggleMenu()">&#9776;</button> <!-- Menu button -->
     
     <div class="sidebar" id="sidebar">
-        <h2 style="text-align: center; padding: 15px; border-bottom: 1px solid #444;">Menu</h2>
+        <h2>Menu</h2>
         <button class="tab-button" onclick="showTab('downloads'); closeMenu();">Downloads</button>
         <button class="tab-button" onclick="showTab('discord'); closeMenu();">Discord</button>
         <button class="tab-button" onclick="showTab('updates'); closeMenu();">Updates</button>
@@ -153,26 +123,26 @@
     </div>
 
     <div class="container" id="container">
-        <h1 style="text-align: center; font-size: 36px; margin-bottom: 20px;">Client Downloads</h1>
+        <h1>Client Downloads</h1>
 
         <!-- Field for entering name -->
-        <div id="nameContainer" class="name-input" style="text-align: center;">
+        <div id="nameContainer" class="name-input">
             <label for="nameInput">Enter your name:</label>
-            <input type="text" id="nameInput" placeholder="Name" style="padding: 10px; width: 80%; max-width: 300px; border-radius: 5px; border: 1px solid #ccc;" />
-            <button onclick="setName()" style="margin-top: 10px; padding: 10px 15px; background: #7289da; color: white; border: none; border-radius: 5px; cursor: pointer;">Set Name</button>
+            <input type="text" id="nameInput" placeholder="Name" />
+            <button onclick="setName()">Set Name</button>
         </div>
 
         <!-- Tab Content -->
         <div id="downloads" class="tab-content">
             <h2>Downloads</h2>
             <a href="PraxClientRelease1.2.2-fix2.zip" download>
-                <button style="padding: 15px; width: 100%; background: #5cb85c; border: none; border-radius: 5px; color: white; cursor: pointer; margin-bottom: 10px;">Prax Client</button>
+                <button>Prax Client</button>
             </a>
             <a href="Zpanel 1.1.3.zip" download>
-                <button style="padding: 15px; width: 100%; background: #5cb85c; border: none; border-radius: 5px; color: white; cursor: pointer; margin-bottom: 10px;">ZPanel</button>
+                <button>ZPanel</button>
             </a>
             <a href="https://www.apkmirror.com/apk/blockman-go-studio/blockman-go/blockman-go-2-94-4-release/" target="_blank">
-                <button style="padding: 15px; width: 100%; background: #5cb85c; border: none; border-radius: 5px; color: white; cursor: pointer; margin-bottom: 10px;">Blockman Go 2.94.4 old version</button>
+                <button>Blockman Go 2.94.4 old version</button>
             </a>
         </div>
 
@@ -193,49 +163,71 @@
                 frameborder="0" 
                 allow="autoplay; encrypted-media" 
                 allowfullscreen
-                style="border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);"
             ></iframe>
         </div>
 
         <!-- Footer -->
         <footer>
-            <p style="margin-top: 20px;">&copy; 2024 Your Website Name. All rights reserved.</p>
+            <p>2024 Zynxus & Debunked Rage all rights reserved</p>
         </footer>
     </div>
 
     <script>
-        // Function to toggle the sidebar menu
-        function toggleMenu() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('hidden');
-        }
-
-        // Function to show specific tab content
         function showTab(tabId) {
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => {
-                content.classList.remove('active'); // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active', 'fade-in'); // Remove active and fade-in classes
+                content.classList.add('fade-out'); // Add fade-out class
             });
-            const activeTab = document.getElementById(tabId);
-            activeTab.classList.add('active'); // Show the selected tab content
+            setTimeout(() => {
+                document.getElementById(tabId).classList.add('active', 'fade-in'); // Show active content with fade-in
+                contents.forEach(content => {
+                    content.classList.remove('fade-out'); // Remove fade-out class after timeout
+                });
+            }, 300); // Timeout to allow fade-out animation to complete
         }
 
-        // Function to close the menu after selecting a tab
         function closeMenu() {
             const sidebar = document.getElementById('sidebar');
-            sidebar.classList.add('hidden');
+            const container = document.getElementById('container');
+            sidebar.classList.add('hidden'); // Hide menu
+            container.style.marginLeft = '0'; // Remove margin from content
         }
 
-        // Function to set the user's name
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const container = document.getElementById('container');
+            sidebar.classList.toggle('hidden'); // Toggle menu visibility
+            container.style.marginLeft = sidebar.classList.contains('hidden') ? '0' : '200px'; // Adjust content margin
+        }
+
         function setName() {
-            const nameInput = document.getElementById('nameInput');
-            const name = nameInput.value;
+            const input = document.getElementById('nameInput');
+            const name = input.value.trim();
             if (name) {
-                alert(`Name set to: ${name}`);
-                nameInput.value = ''; // Clear input field
+                localStorage.setItem('userName', name);
+                document.getElementById('nameContainer').style.display = 'none'; // Hide name input
+                displayMessage(`You have registered as ${name}`); // Show welcome message
+                showTab('downloads'); // Automatically show Downloads tab after setting name
             } else {
-                alert('Please enter a name.');
+                alert('Please enter a valid name.'); // Alert if name is empty
             }
+        }
+
+        // Check if name is already set in local storage when the page loads
+        window.onload = function() {
+            const storedName = localStorage.getItem('userName');
+            if (storedName) {
+                document.getElementById('nameContainer').style.display = 'none'; // Hide name input if already set
+                displayMessage(`You have registered as ${storedName}`); // Show welcome message
+                showTab('downloads'); // Automatically show Downloads tab
+            } else {
+                document.getElementById('nameContainer').style.display = 'block'; // Show name input if not set
+            }
+        };
+
+        function displayMessage(message) {
+            alert(message); // Display alert with welcome message
         }
     </script>
 </body>
