@@ -9,13 +9,14 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #2f3136; /* Body background color */
+            background-color: #2f3136; /* Background color */
             color: white; /* Text color */
+            transition: background-color 0.3s; /* Smooth background color transition */
         }
 
         .sidebar {
             width: 200px;
-            background-color: #23272a; /* Menu background color */
+            background-color: #23272a; /* Sidebar background color */
             height: 100%;
             position: fixed;
             transition: transform 0.3s ease;
@@ -25,12 +26,13 @@
         }
 
         .hidden {
-            transform: translateX(-100%); /* Hide the menu */
+            transform: translateX(-100%); /* Hide sidebar */
         }
 
         .container {
-            margin-left: 200px; /* Space for the menu */
+            margin-left: 200px; /* Space for sidebar */
             padding: 20px;
+            transition: margin-left 0.3s; /* Smooth margin transition */
         }
 
         .tab-button {
@@ -56,10 +58,13 @@
             background-color: #36393f; /* Content background color */
             border-radius: 8px;
             margin-top: 10px;
+            opacity: 0; /* Start invisible for animation */
+            transition: opacity 0.3s ease; /* Fade transition */
         }
 
         .tab-content.active {
             display: block; /* Show active content */
+            opacity: 1; /* Fully visible */
         }
 
         footer {
@@ -90,10 +95,24 @@
         .button-container {
             margin-top: 20px;
         }
+
+        /* Animation for fading in and out */
+        .fade {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .fade-in {
+            opacity: 1;
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
-    <button class="menu-button" onclick="toggleMenu()">&#9776;</button> <!-- Menu button (three lines) -->
+    <button class="menu-button" onclick="toggleMenu()">&#9776;</button> <!-- Menu button -->
     
     <div class="sidebar" id="sidebar">
         <h2>Menu</h2>
@@ -106,7 +125,7 @@
     <div class="container" id="container">
         <h1>Client Downloads</h1>
 
-        <!-- Name input field -->
+        <!-- Field for entering name -->
         <div id="nameContainer" class="name-input">
             <label for="nameInput">Enter your name:</label>
             <input type="text" id="nameInput" placeholder="Name" />
@@ -156,15 +175,23 @@
     <script>
         function showTab(tabId) {
             const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
+            contents.forEach(content => {
+                content.classList.remove('active', 'fade-in'); // Remove active and fade-in classes
+                content.classList.add('fade-out'); // Add fade-out class
+            });
+            setTimeout(() => {
+                document.getElementById(tabId).classList.add('active', 'fade-in'); // Show active content with fade-in
+                contents.forEach(content => {
+                    content.classList.remove('fade-out'); // Remove fade-out class after timeout
+                });
+            }, 300); // Timeout to allow fade-out animation to complete
         }
 
         function closeMenu() {
             const sidebar = document.getElementById('sidebar');
             const container = document.getElementById('container');
-            sidebar.classList.add('hidden'); // Hide the menu
-            container.style.marginLeft = '0'; // Remove the content margin
+            sidebar.classList.add('hidden'); // Hide menu
+            container.style.marginLeft = '0'; // Remove margin from content
         }
 
         function toggleMenu() {
@@ -179,28 +206,28 @@
             const name = input.value.trim();
             if (name) {
                 localStorage.setItem('userName', name);
-                document.getElementById('nameContainer').style.display = 'none'; // Hide name input field
+                document.getElementById('nameContainer').style.display = 'none'; // Hide name input
                 displayMessage(`You have registered as ${name}`); // Show welcome message
-                showTab('downloads'); // Automatically show Downloads tab after name is set
+                showTab('downloads'); // Automatically show Downloads tab after setting name
             } else {
                 alert('Please enter a valid name.'); // Alert if name is empty
             }
         }
 
-        // Check if the name is already set in local storage when the page loads
+        // Check if name is already set in local storage when the page loads
         window.onload = function() {
             const storedName = localStorage.getItem('userName');
             if (storedName) {
-                document.getElementById('nameContainer').style.display = 'none'; // Hide name input field if already set
+                document.getElementById('nameContainer').style.display = 'none'; // Hide name input if already set
                 displayMessage(`You have registered as ${storedName}`); // Show welcome message
-                showTab('downloads'); // Automatically show Downloads tab after name is set
+                showTab('downloads'); // Automatically show Downloads tab
             } else {
-                document.getElementById('nameContainer').style.display = 'block'; // Show name input field if not set
+                document.getElementById('nameContainer').style.display = 'block'; // Show name input if not set
             }
         };
-        
+
         function displayMessage(message) {
-            alert(message); // Display the message in an alert
+            alert(message); // Display alert with welcome message
         }
     </script>
 </body>
