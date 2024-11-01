@@ -6,16 +6,111 @@
     <title>Client Downloads</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #2f3136; /* Body background color */
+            color: white; /* Text color */
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #23272a; /* Menu background color */
+            height: 100%;
+            position: fixed;
+            transition: transform 0.3s ease;
+            left: 0;
+            top: 0;
+            z-index: 1;
+        }
+
+        .hidden {
+            transform: translateX(-100%); /* Hide the menu */
+        }
+
+        .container {
+            margin-left: 200px; /* Space for the menu */
+            padding: 20px;
+        }
+
+        .tab-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #7289da; /* Button color */
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin: 5px 0;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .tab-button:hover {
+            background-color: #5b6eae; /* Hover color */
+        }
+
+        .tab-content {
+            display: none; /* Hide content by default */
+            padding: 20px;
+            background-color: #36393f; /* Content background color */
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .tab-content.active {
+            display: block; /* Show active content */
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        label {
+            color: white; /* Text color */
+            display: block;
+            margin: 10px 0;
+        }
+
+        .discord-button {
+            background-color: #7289da; /* Discord button color */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .discord-button:hover {
+            background-color: #5b6eae; /* Hover color */
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
+    <button class="menu-button" onclick="toggleMenu()">&#9776;</button> <!-- Menu button (three lines) -->
+    
+    <div class="sidebar" id="sidebar">
+        <h2>Menu</h2>
+        <button class="tab-button" onclick="showTab('downloads'); closeMenu();">Downloads</button>
+        <button class="tab-button" onclick="showTab('discord'); closeMenu();">Discord</button>
+        <button class="tab-button" onclick="showTab('updates'); closeMenu();">Updates</button>
+        <button class="tab-button" onclick="location.href='chat.html'; closeMenu();">Chat</button> <!-- New button for Chat tab -->
+    </div>
+
+    <div class="container" id="container">
         <h1>Client Downloads</h1>
 
-        <!-- Tabs -->
-        <div class="tabs">
-            <div class="tab-button" onclick="showTab('downloads')">Downloads</div>
-            <div class="tab-button" onclick="showTab('discord')">Discord</div>
-            <div class="tab-button" onclick="showTab('updates')">Updates</div>
+        <!-- Name input field -->
+        <div id="nameContainer" class="name-input">
+            <label for="nameInput">Enter your name:</label>
+            <input type="text" id="nameInput" placeholder="Name" />
+            <button onclick="setName()">Set Name</button>
         </div>
 
         <!-- Tab Content -->
@@ -34,16 +129,16 @@
 
         <div id="discord" class="tab-content">
             <h2>Discord</h2>
-            <a href="https://discord.gg/cFbtjBH3DS" target="_blank">
+            <a href="https://discord.gg/fmCVdKQrQC" target="_blank">
                 <button class="discord-button">Join Our Discord</button>
             </a>
         </div>
 
         <!-- Updates Tab Content -->
-        <div id="updates" class="tab-content active">
+        <div id="updates" class="tab-content">
             <h2>Updates</h2>
             <iframe 
-                width="560" 
+                width="100%" 
                 height="315" 
                 src="https://www.youtube.com/embed/uH8r3xJmMOg?si=HTyJKZEmaGtlFIkn&autoplay=1&loop=1&playlist=uH8r3xJmMOg&controls=0&disablekb=1&modestbranding=1&fs=0&rel=0" 
                 frameborder="0" 
@@ -65,9 +160,47 @@
             document.getElementById(tabId).classList.add('active');
         }
 
-        // Set the initial tab to 'updates'
+        function closeMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const container = document.getElementById('container');
+            sidebar.classList.add('hidden'); // Hide the menu
+            container.style.marginLeft = '0'; // Remove the content margin
+        }
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const container = document.getElementById('container');
+            sidebar.classList.toggle('hidden'); // Toggle menu visibility
+            container.style.marginLeft = sidebar.classList.contains('hidden') ? '0' : '200px'; // Adjust content margin
+        }
+
+        function setName() {
+            const input = document.getElementById('nameInput');
+            const name = input.value.trim();
+            if (name) {
+                localStorage.setItem('userName', name);
+                document.getElementById('nameContainer').style.display = 'none'; // Hide name input field
+                displayMessage(`You have registered as ${name}`); // Show welcome message
+                showTab('downloads'); // Automatically show Downloads tab after name is set
+            } else {
+                alert('Please enter a valid name.'); // Alert if name is empty
+            }
+        }
+
+        // Check if the name is already set in local storage when the page loads
         window.onload = function() {
-            showTab('updates');
+            const storedName = localStorage.getItem('userName');
+            if (storedName) {
+                document.getElementById('nameContainer').style.display = 'none'; // Hide name input field if already set
+                displayMessage(`You have registered as ${storedName}`); // Show welcome message
+                showTab('downloads'); // Automatically show Downloads tab after name is set
+            } else {
+                document.getElementById('nameContainer').style.display = 'block'; // Show name input field if not set
+            }
+        };
+        
+        function displayMessage(message) {
+            alert(message); // Display the message in an alert
         }
     </script>
 </body>
