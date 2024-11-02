@@ -1,0 +1,23 @@
+{
+    "downloads": [
+        {
+            "name": "Prax Client",
+            "url": "PraxClientRelease1.2.2-fix2.zip"
+        },
+        {
+            "name": "ZPanel",
+            "url": "Zpanel 1.1.4.zip"
+        },
+        {
+            "name": "Blockman Go 2.94.4 old version",
+            "url": "https://www.apkmirror.com/apk/blockman-go-studio/blockman-go/blockman-go-2-94-4-release/"
+        }
+    ],
+    "discord": {
+        "name": "Join Our Discord",
+        "url": "https://discord.gg/fmCVdKQrQC"
+    },
+    "updates": {
+        "videoUrl": "https://www.youtube.com/embed/uH8r3xJmMOg?si=HTyJKZEmaGtlFIkn&autoplay=1&loop=1&playlist=uH8r3xJmMOg&controls=0&disablekb=1&modestbranding=1&fs=0&rel=0"
+    }
+}

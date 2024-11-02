@@ -99,7 +99,7 @@
             text-align: center;
             border-top: 1px solid #7289da;
             padding-top: 10px;
-        }
+            }
     </style>
 </head>
 <body>
@@ -123,22 +123,17 @@
 
         <div id="downloads" class="tab-content">
             <h2>Downloads</h2>
-            <a href="PraxClientRelease1.2.2-fix2.zip" download>
-                <button>Prax Client</button>
-            </a>
-            <a href="1Zpanel 1.1.4.zip" onclick="alert('The panel will be available after I post the video on YouTube.'); return false;">
-                <button>ZPanel 1.1.4</button>
-            </a>
-            <a href="https://www.apkmirror.com/apk/blockman-go-studio/blockman-go/blockman-go-2-94-4-release/" target="_blank">
-                <button>Blockman Go 2.94.4 old version</button>
-            </a>
+            <div id="downloadLinks"></div>
+            <div class="password-container">
+                <label for="passwordInput">Enter password for ZPanel:</label>
+                <input type="password" id="passwordInput" placeholder="Password" />
+                <button onclick="checkPassword()">Download ZPanel</button>
+            </div>
         </div>
 
         <div id="discord" class="tab-content">
             <h2>Discord</h2>
-            <a href="https://discord.gg/fmCVdKQrQC" target="_blank">
-                <button class="discord-button">Join Our Discord</button>
-            </a>
+            <div id="discordLink"></div>
         </div>
 
         <div id="updates" class="tab-content">
@@ -146,7 +141,7 @@
             <iframe 
                 width="100%" 
                 height="315" 
-                src="https://www.youtube.com/embed/uH8r3xJmMOg?si=HTyJKZEmaGtlFIkn&autoplay=1&loop=1&playlist=uH8r3xJmMOg&controls=0&disablekb=1&modestbranding=1&fs=0&rel=0" 
+                id="updateVideo" 
                 frameborder="0" 
                 allow="autoplay; encrypted-media" 
                 allowfullscreen
@@ -159,6 +154,36 @@
     </div>
 
     <script>
+        async function fetchSites() {
+            const response = await fetch('sites.json');
+            return await response.json();
+        }
+
+        function populateDownloads(data) {
+            const downloadLinks = document.getElementById('downloadLinks');
+            data.downloads.forEach(item => {
+                const button = document.createElement('a');
+                button.href = item.url;
+                button.download = item.name;
+                button.innerHTML = `<button>${item.name}</button>`;
+                downloadLinks.appendChild(button);
+            });
+        }
+
+        function populateDiscord(data) {
+            const discordLink = document.getElementById('discordLink');
+            const button = document.createElement('a');
+            button.href = data.discord.url;
+            button.target = '_blank';
+            button.innerHTML = `<button class="discord-button">${data.discord.name}</button>`;
+            discordLink.appendChild(button);
+        }
+
+        function populateUpdates(data) {
+            const updateVideo = document.getElementById('updateVideo');
+            updateVideo.src = data.updates.videoUrl;
+        }
+
         function showTab(tabId) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => {
@@ -194,7 +219,19 @@
             }
         }
 
-        window.onload = function() {
+        function checkPassword() {
+            const input = document.getElementById('passwordInput');
+            const password = input.value.trim();
+            const correctPassword = 'Zexus114'; // Senha correta
+            
+            if (password === correctPassword) {
+                window.location.href = 'Zpanel 1.1.4.zip'; // Redireciona para o download
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        }
+
+        window.onload = async function() {
             const storedName = localStorage.getItem('userName');
             if (storedName) {
                 document.getElementById('nameContainer').style.display = 'none';
@@ -203,6 +240,10 @@
             } else {
                 document.getElementById('nameContainer').style.display = 'block';
             }
+            const data = await fetchSites();
+            populateDownloads(data);
+            populateDiscord(data);
+            populateUpdates(data);
         };
 
         function displayMessage(message) {
