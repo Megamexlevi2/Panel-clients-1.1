@@ -100,6 +100,11 @@
             border-top: 1px solid #7289da;
             padding-top: 10px;
             }
+            
+        .password-container {
+            display: none; /* Inicialmente oculto */
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -124,10 +129,11 @@
         <div id="downloads" class="tab-content">
             <h2>Downloads</h2>
             <div id="downloadLinks"></div>
-            <div class="password-container">
+            <button onclick="togglePasswordMenu()">Download ZPanel</button>
+            <div class="password-container" id="passwordContainer">
                 <label for="passwordInput">Enter password for ZPanel:</label>
                 <input type="password" id="passwordInput" placeholder="Password" />
-                <button onclick="checkPassword()">Download ZPanel</button>
+                <button onclick="checkPassword()">Submit</button>
             </div>
         </div>
 
@@ -204,6 +210,11 @@
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('show');
             document.getElementById('container').style.marginLeft = sidebar.classList.contains('show') ? '200px' : '0';
+        }
+
+        function togglePasswordMenu() {
+            const passwordContainer = document.getElementById('passwordContainer');
+            passwordContainer.style.display = passwordContainer.style.display === 'none' ? 'block' : 'none';
         }
 
         function setName() {
