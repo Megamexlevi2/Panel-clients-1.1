@@ -115,20 +115,14 @@
     <div class="container" id="container">
         <h1>Client Downloads</h1>
 
-        <div id="nameContainer" class="name-input">
-            <label for="nameInput">Enter your name:</label>
-            <input type="text" id="nameInput" placeholder="Name" />
-            <button onclick="setName()">Set Name</button>
-        </div>
-
-        <div id="downloads" class="tab-content">
+        <div id="downloads" class="tab-content active">
             <h2>Downloads</h2>
             <a href="PraxClientRelease1.2.2-fix2.zip" download>
                 <button>Prax Client</button>
             </a>
+            <button onclick="showUnavailableMessage()">Prax 1.2.3</button>
             <a href="1Zpanel 1.1.4.zip" download>
-    <button>ZPanel 1.1.4</button>
-</a>
+                <button>ZPanel 1.1.4</button>
             </a>
             <a href="https://www.apkmirror.com/apk/blockman-go-studio/blockman-go/blockman-go-2-94-4-release/" target="_blank">
                 <button>Blockman Go 2.94.4 old version</button>
@@ -182,32 +176,8 @@
             document.getElementById('container').style.marginLeft = sidebar.classList.contains('show') ? '200px' : '0';
         }
 
-        function setName() {
-            const input = document.getElementById('nameInput');
-            const name = input.value.trim();
-            if (name) {
-                localStorage.setItem('userName', name);
-                document.getElementById('nameContainer').style.display = 'none';
-                displayMessage(`You have registered as ${name}`);
-                showTab('downloads');
-            } else {
-                alert('Please enter a valid name.');
-            }
-        }
-
-        window.onload = function() {
-            const storedName = localStorage.getItem('userName');
-            if (storedName) {
-                document.getElementById('nameContainer').style.display = 'none';
-                displayMessage(`You have registered as ${storedName}`);
-                showTab('downloads');
-            } else {
-                document.getElementById('nameContainer').style.display = 'block';
-            }
-        };
-
-        function displayMessage(message) {
-            alert(message);
+        function showUnavailableMessage() {
+            alert("This version is not available, please use another one.");
         }
     </script>
 </body>
